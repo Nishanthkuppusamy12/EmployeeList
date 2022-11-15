@@ -21,6 +21,7 @@ import com.springBoot.crud.repository.EmployeeRepository;
 public class EmployeeService {
 	@Autowired
 	public EmployeeRepository employeeRepo;
+	public ResponseObj responseObj;
 	
 	public List<EmployeeDto> getAllEmployees(){
 		
@@ -29,14 +30,17 @@ public class EmployeeService {
 		return employee;
 	}
 
-	public void addEmployees(EmployeeDto employee) {
+	public ResponseObj addEmployees(EmployeeDto employee) {
 		
 		employeeRepo.save(employee);
+		return responseObj;
+		
 	}
 
 	public void updateEmployees(String id,EmployeeDto employee) {
 		
 		employeeRepo.save(employee);
+		
 	}
 
 	public void deleteEmployee(String id) {
