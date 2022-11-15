@@ -6,4 +6,5 @@ import com.springBoot.crud.bean.EmployeeDto;
 
 public interface EmployeeRepository extends CrudRepository<EmployeeDto,String>{
 
+	
 }

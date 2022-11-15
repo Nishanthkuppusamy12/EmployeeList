@@ -1,5 +1,6 @@
 package com.springBoot.crud.bean;
 
+
 import org.springframework.context.annotation.ComponentScan;
 
 import jakarta.persistence.Entity;
@@ -8,15 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
 @Entity
-@ComponentScan ("com.springBoot.crud")
+@Table(name="employee")
 public class EmployeeDto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private int age;
+    private int age;
 	private int experience;
 
 	public EmployeeDto() {
