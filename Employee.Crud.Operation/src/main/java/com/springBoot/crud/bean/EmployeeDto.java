@@ -1,7 +1,7 @@
 package com.springBoot.crud.bean;
 
 
-import org.springframework.context.annotation.ComponentScan;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
