@@ -3,14 +3,16 @@ package com.springBoot.crud.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springBoot.crud.bean.EmployeeDto;
@@ -29,29 +31,47 @@ public class EmployeeController{
 		return employeeSer.getAllEmployees();
 	}
 	@PostMapping("/insertEmployees")
-	public void addEmployee(@RequestBody EmployeeDto employee) {
-		
-	     employeeSer.addEmployees(employee);
-	
+	@ResponseBody
+	public ResponseEntity<Object> addEmployee(@RequestBody EmployeeDto employee) {
+           
+		   try {
+		   if(employee !=null){
+			 return employeeSer.addEmployees(employee);
+		   }
+		   }catch(Exception e) {
+			 System.out.println("There is No Employee Object");	
 	}
+		return new ResponseEntity<Object>("The object would be null ",HttpStatus.BAD_REQUEST);
+}
 	
-	@PatchMapping("/updateEmployee/{id}")
-	public ResponseEntity<Object> updateEmployees(@PathVariable String id,@RequestBody EmployeeDto employee) {
+	@PutMapping("/updateEmployee/{id}")
+	public void  updateEmployees(@PathVariable("id") String id,@RequestBody EmployeeDto employee) {
 		
-		//if(!(id.isEmpty())) {
-	     return employeeSer.updateEmployees(id,employee); 
-		//}else return new ResponseEntity<>("employee is empty ",HttpStatus.BAD_REQUEST);
+	      employeeSer.updateEmployees(id,employee); 
 	}
     @DeleteMapping("/deleteEmployeeId/{id}")
+    @ResponseBody
 	public ResponseEntity<Object> deleteEmployee(@PathVariable String id ) {
-		//if(!(id.isEmpty())) {
-    	 return employeeSer.deleteEmployee(id);
-		//}else return new ResponseEntity<>("Employee Id is empty ",HttpStatus.BAD_REQUEST);
-
+		
+    	try {
+    	if(id!=null) {
+    	return employeeSer.deleteEmployee(id);
+    	}
+    	}catch(Exception e) {
+    	System.out.println("The current id is Not There");
+    	}
+    	return new ResponseEntity<Object>("The Current Id is Not There ",HttpStatus.BAD_REQUEST);
+		 
 	}
     @GetMapping("/getEmployeeId/{id}")
-    public ResponseEntity<?> findById(@PathVariable String id ,@RequestBody EmployeeDto employee) {
-    
-            return employeeSer.findById(id);
-    }
+    @ResponseBody
+    public ResponseEntity<Object> findByid(@PathVariable String id ,@RequestBody EmployeeDto employee) {
+            
+    	//if(id!=null) {
+    		return employeeSer.findByid(id,employee );
+    //}else {
+   // System.out.println("The Id Is Not Available");
+   // }
+    	//return new ResponseEntity<Object>("The current Id Is Not Available",HttpStatus.BAD_REQUEST);	
+}
 }

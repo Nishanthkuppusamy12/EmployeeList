@@ -28,35 +28,27 @@ public class EmployeeService {
 		return employee;
 	}
 
-	public void addEmployees(EmployeeDto employee) {
+	public ResponseEntity<Object> addEmployees(EmployeeDto employee) {
        
-		//if(employee!=null) {
-		//return new ResponseEntity<>("Employee is Empty ",HttpStatus.BAD_REQUEST);
-		//}else {
-		 employeeRepo.save(employee);
-		//return new ResponseEntity<>("Employee added succefully \n status code is 200 ",HttpStatus.OK);
-		//}
+	 employeeRepo.save(employee);
+	return new ResponseEntity<Object>("Added succefully ",HttpStatus.OK);
 	}
-	public ResponseEntity<Object> updateEmployees(String id,EmployeeDto employee) {
+	public void updateEmployees(String id,EmployeeDto employee) {
 	
 	     employeeRepo.save(employee);
-		 return new ResponseEntity<>("Employee Updated Succefully",HttpStatus.OK);
 	}
 	public ResponseEntity<Object> deleteEmployee(String id) {
 		 
-		if(!(id.isEmpty())) {
-		 employeeRepo.deleteById(id);
-		 return new ResponseEntity<>("deleted succefully ",HttpStatus.OK);
-		}return new ResponseEntity<>("There is No current id ",HttpStatus.BAD_REQUEST);
-	
+		employeeRepo.deleteById(id);
+		return new ResponseEntity<Object>("Deleted succefully ",HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> findById(String id) {
+	public ResponseEntity<Object> findByid(String id, EmployeeDto employee) {
 		
 		   employeeRepo.findById(id);
-	//return null;
-	return null;
+		return new ResponseEntity<Object>("This is the Your Finding Id ",HttpStatus.OK);
 	   
 	}
+
 
 }
