@@ -3,16 +3,15 @@ package com.springBoot.crud.service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
-import org.springframework.stereotype.Repository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.repository.CrudRepository;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+
 import com.springBoot.crud.bean.EmployeeDto;
 import com.springBoot.crud.repository.EmployeeRepository;
 
@@ -21,7 +20,6 @@ import com.springBoot.crud.repository.EmployeeRepository;
 public class EmployeeService {
 	@Autowired
 	public EmployeeRepository employeeRepo;
-	public ResponseObj responseObj;
 	
 	public List<EmployeeDto> getAllEmployees(){
 		
@@ -30,22 +28,30 @@ public class EmployeeService {
 		return employee;
 	}
 
-	public ResponseObj addEmployees(EmployeeDto employee) {
-		
-		employeeRepo.save(employee);
-		return responseObj;
-		
-	}
+	public ResponseEntity<Object> addEmployees(EmployeeDto employee) {
+       
+	 employeeRepo.save(employee);
+	return new ResponseEntity<Object>("Employee Added Succefully ",HttpStatus.OK);
 
-	public void updateEmployees(String id,EmployeeDto employee) {
-		
-		employeeRepo.save(employee);
-		
 	}
-
-	public void deleteEmployee(String id) {
-		
+	public ResponseEntity<Object> deleteEmployee(String id) {
+		 
 		employeeRepo.deleteById(id);
+		return new ResponseEntity<Object>("Deleted succefully ",HttpStatus.OK);
 	}
+
+	public ResponseEntity<Object> getEmployeeByid(String id,EmployeeDto employee) {
+		
+		employeeRepo.save(employee);
+	    return new ResponseEntity<Object>("The Given Id is Here",HttpStatus.OK);
+	   
+	}
+
+	public ResponseEntity<Object> updateEmployees(String id, EmployeeDto employee) {
+		     
+		 employeeRepo.save(employee);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
 
 }
