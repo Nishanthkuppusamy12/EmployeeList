@@ -31,11 +31,8 @@ public class EmployeeService {
 	public ResponseEntity<Object> addEmployees(EmployeeDto employee) {
        
 	 employeeRepo.save(employee);
-	return new ResponseEntity<Object>("Added succefully ",HttpStatus.OK);
-	}
-	public void updateEmployees(String id,EmployeeDto employee) {
-	
-	     employeeRepo.save(employee);
+	return new ResponseEntity<Object>("Employee Added Succefully ",HttpStatus.OK);
+
 	}
 	public ResponseEntity<Object> deleteEmployee(String id) {
 		 
@@ -43,11 +40,17 @@ public class EmployeeService {
 		return new ResponseEntity<Object>("Deleted succefully ",HttpStatus.OK);
 	}
 
-	public ResponseEntity<Object> findByid(String id, EmployeeDto employee) {
+	public ResponseEntity<Object> getEmployeeByid(String id,EmployeeDto employee) {
 		
-		   employeeRepo.findById(id);
-		return new ResponseEntity<Object>("This is the Your Finding Id ",HttpStatus.OK);
+		employeeRepo.save(employee);
+	    return new ResponseEntity<Object>("The Given Id is Here",HttpStatus.OK);
 	   
+	}
+
+	public ResponseEntity<Object> updateEmployees(String id, EmployeeDto employee) {
+		     
+		 employeeRepo.save(employee);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 

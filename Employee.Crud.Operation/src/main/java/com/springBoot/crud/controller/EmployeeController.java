@@ -1,3 +1,4 @@
+
 package com.springBoot.crud.controller;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class EmployeeController{
 }
 	
 	@PutMapping("/updateEmployee/{id}")
+	@ResponseBody
 	public void  updateEmployees(@PathVariable("id") String id,@RequestBody EmployeeDto employee) {
 		
 	      employeeSer.updateEmployees(id,employee); 
@@ -65,13 +67,12 @@ public class EmployeeController{
 	}
     @GetMapping("/getEmployeeId/{id}")
     @ResponseBody
-    public ResponseEntity<Object> findByid(@PathVariable String id ,@RequestBody EmployeeDto employee) {
+    public ResponseEntity<Object> getEmployeeByid(@PathVariable String id ,@RequestBody EmployeeDto employee) {
             
-    	//if(id!=null) {
-    		return employeeSer.findByid(id,employee );
-    //}else {
-   // System.out.println("The Id Is Not Available");
-   // }
-    	//return new ResponseEntity<Object>("The current Id Is Not Available",HttpStatus.BAD_REQUEST);	
+  	   
+    	return employeeSer.getEmployeeByid(id, employee);
+   
+    }
+    
 }
-}
+
